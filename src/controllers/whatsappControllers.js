@@ -20,6 +20,11 @@ const VerifyToken = (req, res) => {
   }
 };
 
+/*const ReceivedMessage = (req, res) => {
+  console.info("Hola received");
+  res.send("Hola received");
+};*/
+
 const ReceivedMessage = (req, res) => {
   try {
     var entry = req.body["entry"][0];
@@ -27,13 +32,7 @@ const ReceivedMessage = (req, res) => {
     var value = changes["value"];
     var messageObject = value["messages"];
 
-    if (typeof messageObject != "undefined") {
-      var messages = messageObject[0];
-
-      var text = GetTextUser(messages);
-      myConsole.log(text);
-      console.log(text);
-    }
+    myConsole.log(messageObject);
 
     res.send("EVENT_RECEIVED");
   } catch (e) {
@@ -41,6 +40,29 @@ const ReceivedMessage = (req, res) => {
     res.send("EVENT_RECEIVED");
   }
 };
+
+// const ReceivedMessage = (req, res) => {
+//   try {
+//     var entry = req.body["entry"][0];
+//     var changes = entry["changes"][0];
+//     var value = changes["value"];
+//     var messageObject = value["messages"];
+
+//     if (typeof messageObject != "undefined") {
+//       var messages = messageObject[0];
+
+//       //var text = GetTextUser(messages);
+//       var text = "Hola de consola";
+//       myConsole.log(text);
+//       //console.log(text);
+//     }
+
+//     res.send("EVENT_RECEIVED");
+//   } catch (e) {
+//     myConsole.log(e);
+//     res.send("EVENT_RECEIVED");
+//   }
+// };
 
 function GetTextUser(messages) {
   var text = "";
@@ -52,7 +74,7 @@ function GetTextUser(messages) {
     var interactiveObject = messages["interactive"];
     var typeInteractive = interactiveObject["type"];
 
-    myConsole.log(interactiveObject);
+    // myConsole.log(interactiveObject);
 
     if (typeInteractive == "button_reply") {
       text = interactiveObject["button_reply"]["title"];
