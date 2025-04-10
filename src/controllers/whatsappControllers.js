@@ -1,6 +1,3 @@
-const fs = require("fs");
-const myConsole = new console.Console(fs.createWriteStream("./logs.txt"));
-
 const VerifyToken = (req, res) => {
   try {
     var accessToken = "TOKIASJAPGHDSTWFASAERP10";
@@ -8,7 +5,7 @@ const VerifyToken = (req, res) => {
 
     var challenge = req.query["hub.challenge"];
 
-    myConsole.log(messageObject);
+    console.log(messageObject);
 
     if (challenge != null && token != null && token == accessToken) {
       res.send(challenge);
@@ -20,11 +17,6 @@ const VerifyToken = (req, res) => {
   }
 };
 
-/*const ReceivedMessage = (req, res) => {
-  console.info("Hola received");
-  res.send("Hola received");
-};*/
-
 const ReceivedMessage = (req, res) => {
   try {
     var entry = req.body["entry"][0];
@@ -32,37 +24,21 @@ const ReceivedMessage = (req, res) => {
     var value = changes["value"];
     var messageObject = value["messages"];
 
-    myConsole.log(messageObject);
+    if (typeof messageObject != "undefined") {
+      var messages = messageObject[0];
+
+      var text = GetTextUser(messages);
+      //var text = "Hola de consola";
+      console.log(text);
+    }
 
     res.send("EVENT_RECEIVED");
   } catch (e) {
-    myConsole.log(e);
+    console.log(e);
+
     res.send("EVENT_RECEIVED");
   }
 };
-
-// const ReceivedMessage = (req, res) => {
-//   try {
-//     var entry = req.body["entry"][0];
-//     var changes = entry["changes"][0];
-//     var value = changes["value"];
-//     var messageObject = value["messages"];
-
-//     if (typeof messageObject != "undefined") {
-//       var messages = messageObject[0];
-
-//       //var text = GetTextUser(messages);
-//       var text = "Hola de consola";
-//       myConsole.log(text);
-//       //console.log(text);
-//     }
-
-//     res.send("EVENT_RECEIVED");
-//   } catch (e) {
-//     myConsole.log(e);
-//     res.send("EVENT_RECEIVED");
-//   }
-// };
 
 function GetTextUser(messages) {
   var text = "";
@@ -81,10 +57,10 @@ function GetTextUser(messages) {
     } else if (typeInteractive == "list_reply") {
       text = interactiveObject["list_reply"]["title"];
     } else {
-      myConsole.log("Sin mensaje");
+      console.log("Sin mensaje");
     }
   } else {
-    myConsole.log("Sin mensaje");
+    console.log("Sin mensaje");
   }
   return text;
 }
