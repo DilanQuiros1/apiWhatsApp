@@ -7,9 +7,9 @@ const VerifyToken = (req, res) => {
 
     var challenge = req.query["hub.challenge"];
 
-    console.log(messageObject);
+    //console.log(messageObject);
 
-    if (challenge != null && token != null) {
+    if (challenge != null && token != null && token == accessToken) {
       res.send(challenge);
     } else {
       res.status(400).send();
@@ -37,7 +37,7 @@ const ReceivedMessage = (req, res) => {
         var data = samples.SampleImage(number);
         whatsAppService.SendMessageWhatsApp(data);
       } else if (text == "video") {
-        var data = samples.SampleAudio(number);
+        var data = samples.SampleVideo(number);
         whatsAppService.SendMessageWhatsApp(data);
       } else if (text == "audio") {
         var data = samples.SampleAudio(number);
