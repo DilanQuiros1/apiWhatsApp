@@ -1,5 +1,5 @@
 const whatsAppService = require("../services/whatsappService");
-
+const samples = require("../shared/sampleModels");
 const VerifyToken = (req, res) => {
   try {
     var accessToken = "TOKIASJAPGHDSTWFASAERP10";
@@ -30,9 +30,36 @@ const ReceivedMessage = (req, res) => {
       var messages = messageObject[0];
       var number = messages["from"];
       var text = GetTextUser(messages);
+      if (text == "text") {
+        var data = samples.SampleText("Hola usuario ", number);
+        whatsAppService.SendMessageWhatsApp(data);
+      } else if (text == "image") {
+        var data = samples.SampleImage(number);
+        whatsAppService.SendMessageWhatsApp(data);
+      } else if (text == "video") {
+        var data = samples.SampleAudio(number);
+        whatsAppService.SendMessageWhatsApp(data);
+      } else if (text == "audio") {
+        var data = samples.SampleAudio(number);
+        whatsAppService.SendMessageWhatsApp(data);
+      } else if (text == "document") {
+        var data = samples.SampleDocument(number);
+        whatsAppService.SendMessageWhatsApp(data);
+      } else if (text == "button") {
+        var data = samples.SampleButtons(number);
+        whatsAppService.SendMessageWhatsApp(data);
+      } else if (text == "list") {
+        var data = samples.SampleList(number);
+        whatsAppService.SendMessageWhatsApp(data);
+      } else if (text == "location") {
+        var data = samples.SampleLocation(number);
+        whatsAppService.SendMessageWhatsApp(data);
+      } else {
+        var data = samples.SampleText("No entiendo ", number);
+        whatsAppService.SendMessageWhatsApp(data);
+      }
 
       console.log(text);
-      whatsAppService.SendMessageWhatsApp("Usuario dijo: " + text, number);
     }
 
     res.send("EVENT_RECEIVED");
