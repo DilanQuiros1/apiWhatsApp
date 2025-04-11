@@ -1,3 +1,5 @@
+const whatsAppService = require("../services/whatsappService");
+
 const VerifyToken = (req, res) => {
   try {
     var accessToken = "TOKIASJAPGHDSTWFASAERP10";
@@ -26,10 +28,11 @@ const ReceivedMessage = (req, res) => {
 
     if (typeof messageObject != "undefined") {
       var messages = messageObject[0];
-
+      var number = messages["from"];
       var text = GetTextUser(messages);
-      //var text = "Hola de consola";
+
       console.log(text);
+      whatsAppService.SendMessageWhatsApp("Usuario dijo: " + text, number);
     }
 
     res.send("EVENT_RECEIVED");
