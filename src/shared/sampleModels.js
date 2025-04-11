@@ -109,64 +109,64 @@ function SampleLocation(number) {
       address: "Innova Bikes",
     },
   });
+}
 function SampleList(number) {
   const data = JSON.stringify({
     messaging_product: "whatsapp",
     to: number,
     type: "interactive",
-    "interactive": {
-        "type": "list",
-        "header": {
-            "type": "text",
-            "text": "Bienvenido"
-        },
-        "body": {
-            "text": "Tengo estas opciones: "
-        },
-        "footer": {
-            "text": "Selecciona la que deseas para atenderte mejor"
-        },
-        "action": {
-            "button": "Ver opciones",
-            "sections": [
-                {
-                    "title": "Estamos para servirte",
-                    "rows": [
-                        {
-                            "id": "main-comprar",
-                            "title": "Comprar",
-                            "description": "Compra los productos preferidos"
-                        },
-                        {
-                            "id": "main-vendedor",
-                            "title": "Vender",
-                            "description": "Vende tus productos"
-                        }
-                    ]
-                },
-                {
-                    "title": "Centro de atencion",
-                    "rows": [
-                        {
-                            "id": "main-agencia",
-                            "title": "Agencia",
-                            "description": "<Puedes visitar nuestra agencia aqui>"
-                        },
-                        {
-                            "id": "main-contacto",
-                            "title": "Centro de contacto",
-                            "description": "Te atendera uno de nuestros agentes"
-                        }
-                    ]
-                }
-            ]
-        }
-    }
+    interactive: {
+      type: "list",
+      header: {
+        type: "text",
+        text: "Bienvenido",
+      },
+      body: {
+        text: "Tengo estas opciones: ",
+      },
+      footer: {
+        text: "Selecciona la que deseas para atenderte mejor",
+      },
+      action: {
+        button: "Ver opciones",
+        sections: [
+          {
+            title: "Estamos para servirte",
+            rows: [
+              {
+                id: "main-comprar",
+                title: "Comprar",
+                description: "Compra los productos preferidos",
+              },
+              {
+                id: "main-vendedor",
+                title: "Vender",
+                description: "Vende tus productos",
+              },
+            ],
+          },
+          {
+            title: "Centro de atencion",
+            rows: [
+              {
+                id: "main-agencia",
+                title: "Agencia",
+                description: "<Puedes visitar nuestra agencia aqui>",
+              },
+              {
+                id: "main-contacto",
+                title: "Centro de contacto",
+                description: "Te atendera uno de nuestros agentes",
+              },
+            ],
+          },
+        ],
+      },
+    },
   });
 
   return data;
 }
-
 
 module.exports = {
   SampleText,
@@ -178,6 +178,3 @@ module.exports = {
   SampleLocation,
   SampleList,
 };
-
-
-
