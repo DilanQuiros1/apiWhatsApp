@@ -9,7 +9,7 @@ const VerifyToken = (req, res) => {
 
     console.log(messageObject);
 
-    if (challenge != null && token != null && token == accessToken) {
+    if (challenge != null && token != null) {
       res.send(challenge);
     } else {
       res.status(400).send();
